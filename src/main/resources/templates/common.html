@@ -2,14 +2,14 @@
 <html lang="en">
 <head th:fragment="head"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title th:text="${msgTitle}">Gestion des salariés</title>
+    <title th:text="${msgTitle}?: 'Gestion des salariés'"></title>
     <link rel="stylesheet" href="./static/bootstrap.min.css">
     <link rel="stylesheet" href="./static/font-awesome.css">
 </head>
 
 <div th:fragment="navigation(nbSalarie)">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8080/" th:text="${msgTitle}">Gestion des salariés</a>
+        <a class="navbar-brand" href="http://localhost:8080/" th:text="${msgTitle}?: 'Gestion des salariés'"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
