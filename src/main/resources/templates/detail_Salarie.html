@@ -7,50 +7,33 @@
     <link rel="stylesheet" href="./static/font-awesome.css">
 </head>
 <body>
-
-<div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8080/">Gestion des salariés</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li><a href="http://localhost:8080/salaries?page=0&amp;size=10&amp;sortProperty=nom&amp;sortDirection=ASC" class="nav-link">Liste des salariés <span class="badge badge-primary">26</span></a></li>
-            </ul>
-
-            <form class="form-inline my-2 my-lg-0" role="search" action="http://localhost:8080/salaries" method="GET">
-                <div class="form-group form-inline">
-                    <input name="nom" class="form-control" placeholder="Rechercher un nom" type="text">
-                </div>
-                <button type="submit" class="btn btn-outline-success ml-2 my-2 my-sm-0">Rechercher</button>
-            </form>
-        </div>
-    </nav>
-</div>
+  
+    <div th:include="~{common :: navigation(nbSalarie =${nbSalarie})}"></div>
 
 <div class="container">
     <div th:text="#{msg.salarie}"></div><!-- TODO better messages example -->
 
     <h2>Détail du salarié</h2>
     
-    <form id="saveForm" action="http://localhost:8080/salaries/aide/10" method="post" class="row">
+    <form id="saveForm" th:action="${urlAddOrUpdate}" method="post" class="row">
 
         <div class="col-lg-6">
             <div class="form-group">
-                <label class="form-control-label" for="id">ID</label>
-                <input type="text" value="10" class="form-control" name="id" id="id" disabled="true">
+                <input id="id" th:field="${salarie.id}" type="hidden"/>
+                <div th:if="${salarie.id != null}">
+                    <label class="form-control-label" for="id">ID</label>
+                    <input type="text" th:value="${salarie.id}" class="form-control" name="id" id="idSalarie" disabled="true">
+                </div>
 
                 <label class="form-control-label" for="nom">Nom</label>
-                <input type="text" value="Jean Dupont" class="form-control" name="nom" id="nom">
+                <input type="text" th:value="${salarie.nom}" class="form-control" name="nom" id="nom">
 
                 <label class="form-control-label" for="nom">moisEnCours</label>
-                <input type="date" value="03/2023" class="form-control" name="moisEnCours"
+                <input type="date" th:value="${salarie.moisEnCours}" class="form-control" name="moisEnCours"
                        id="moisEnCours">
 
                 <label class="form-control-label" for="nom">moisDebutContrat</label>
-                <input type="date" value="08/2022" class="form-control" name="moisDebutContrat" id="moisDebutContrat">
+                <input type="date" th:value="${salarie.moisDebutContrat}" class="form-control" name="moisDebutContrat" id="moisDebutContrat">
             </div>
         </div>
 
@@ -125,7 +108,10 @@
     <div class="row mt-2">
         <div class="col-lg-6">
             <input form="saveForm" class="btn btn-primary" type="submit" value="Enregistrer">
-            <a href="/salaries/10/delete" class="btn btn-danger">Supprimer</a>
+            <div style="display: inline-block;" th:if="${salarie.id}">
+                <a th:href="@{/salaries/{id}/delete(id=${salarie.id})}" class="btn btn-danger">Supprimer</a>
+            </div>
+            
         </div>
     </div>
 
