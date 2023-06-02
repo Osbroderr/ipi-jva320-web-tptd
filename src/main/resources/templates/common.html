@@ -16,7 +16,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li><a href="http://localhost:8080/salaries?page=0&amp;size=10&amp;sortProperty=id&amp;sortDirection=ASC" class="nav-link">Liste des salariés <span class="badge badge-primary" th:text="${nbSalarie}"></span></a></li>
+                <li><a href="http://localhost:8080/salaries?page=1&amp;size=1&amp;sortProperty=id&amp;sortDirection=ASC" class="nav-link">Liste des salariés <span class="badge badge-primary" th:text="${nbSalarie}"></span></a></li>
             </ul>
 
             <form class="form-inline my-2 my-lg-0" role="search" th:action="@{/salarie/findByNom}" method="GET">
