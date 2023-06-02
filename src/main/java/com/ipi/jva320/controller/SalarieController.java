@@ -90,4 +90,14 @@ public class SalarieController {
         modelAndView.addObject("nbSalarie", nombreSalarie);
         return modelAndView;
     }
+
+    @GetMapping("/salarie/findByNom")
+    public ModelAndView findByNom(String name) {
+        ModelAndView modelAndView = new ModelAndView("list");
+        List<SalarieAideADomicile> salariesFound = salarieAideADomicileService.getSalaries(name);
+        Long nombreSalarie = salarieAideADomicileService.countSalaries();
+        modelAndView.addObject("salaries", salariesFound);
+        modelAndView.addObject("nbSalarie", nombreSalarie);
+        return modelAndView;
+    }
 }
